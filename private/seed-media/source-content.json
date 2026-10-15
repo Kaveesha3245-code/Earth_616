@@ -1,0 +1,675 @@
+{
+  "source": "Presentation1.pptx",
+  "slides": [
+    {
+      "slide": 1,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media1.mp4",
+              "type": "video",
+              "url": "/media/media1.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media1.mp4",
+              "type": "media",
+              "url": "/media/media1.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image5.png",
+              "type": "image",
+              "url": "/media/image5.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "4165600",
+              "y": "0"
+            },
+            "ext": {
+              "cx": "3860800",
+              "cy": "6858000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media2.mp4",
+              "type": "video",
+              "url": "/media/media2.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media2.mp4",
+              "type": "media",
+              "url": "/media/media2.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image6.png",
+              "type": "image",
+              "url": "/media/image6.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "3352800",
+              "y": "0"
+            },
+            "ext": {
+              "cx": "5486400",
+              "cy": "6858000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media3.mp4",
+              "type": "video",
+              "url": "/media/media3.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media3.mp4",
+              "type": "media",
+              "url": "/media/media3.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image7.png",
+              "type": "image",
+              "url": "/media/image7.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "4167188",
+              "y": "0"
+            },
+            "ext": {
+              "cx": "3857625",
+              "cy": "6858000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/image8.gif",
+              "type": "image",
+              "url": "/media/image8.gif"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "973394",
+              "y": "206846"
+            },
+            "ext": {
+              "cx": "10471355",
+              "cy": "6444308"
+            }
+          }
+        },
+        {
+          "kind": "sp",
+          "text": [
+            "WELCOME TO EARTH 616"
+          ],
+          "assets": [],
+          "bounds": {
+            "off": {
+              "x": "3790335",
+              "y": "3043084"
+            },
+            "ext": {
+              "cx": "5314335",
+              "cy": "584775"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "shapes": []
+    },
+    {
+      "slide": 6,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media4.mp4",
+              "type": "video",
+              "url": "/media/media4.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media4.mp4",
+              "type": "media",
+              "url": "/media/media4.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image9.png",
+              "type": "image",
+              "url": "/media/image9.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "4167188",
+              "y": "0"
+            },
+            "ext": {
+              "cx": "3857625",
+              "cy": "6858000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "shapes": [
+        {
+          "kind": "sp",
+          "text": [
+            "Password: --------------------------------------------------"
+          ],
+          "assets": [],
+          "bounds": {
+            "off": {
+              "x": "3755923",
+              "y": "2487561"
+            },
+            "ext": {
+              "cx": "5110823",
+              "cy": "369332"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 8,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media5.mp4",
+              "type": "video",
+              "url": "/media/media5.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media5.mp4",
+              "type": "media",
+              "url": "/media/media5.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image10.png",
+              "type": "image",
+              "url": "/media/image10.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "3052763",
+              "y": "0"
+            },
+            "ext": {
+              "cx": "6086475",
+              "cy": "6858000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 9,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media6.mp4",
+              "type": "video",
+              "url": "/media/media6.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media6.mp4",
+              "type": "media",
+              "url": "/media/media6.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image11.png",
+              "type": "image",
+              "url": "/media/image11.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "2095499",
+              "y": "489671"
+            },
+            "ext": {
+              "cx": "7838209",
+              "cy": "5878657"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 10,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/image12.png",
+              "type": "image",
+              "url": "/media/image12.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "756106",
+              "y": "854484"
+            },
+            "ext": {
+              "cx": "2921160",
+              "cy": "3650148"
+            }
+          }
+        },
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId3",
+              "target": "../media/image13.png",
+              "type": "image",
+              "url": "/media/image13.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "8381510",
+              "y": "854484"
+            },
+            "ext": {
+              "cx": "2921160",
+              "cy": "3650148"
+            }
+          }
+        },
+        {
+          "kind": "sp",
+          "text": [
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. ",
+            "Mauris et orci.",
+            ""
+          ],
+          "assets": [],
+          "bounds": {
+            "off": {
+              "x": "476701",
+              "y": "4944703"
+            },
+            "ext": {
+              "cx": "11036873",
+              "cy": "1754326"
+            }
+          }
+        },
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId4",
+              "target": "../media/image14.png",
+              "type": "image",
+              "url": "/media/image14.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "4448607",
+              "y": "854484"
+            },
+            "ext": {
+              "cx": "2921160",
+              "cy": "3650148"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 11,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media7.mp4",
+              "type": "video",
+              "url": "/media/media7.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media7.mp4",
+              "type": "media",
+              "url": "/media/media7.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image15.png",
+              "type": "image",
+              "url": "/media/image15.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "2145435",
+              "y": "921005"
+            },
+            "ext": {
+              "cx": "6977783",
+              "cy": "5015990"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 12,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media8.mp4",
+              "type": "video",
+              "url": "/media/media8.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media8.mp4",
+              "type": "media",
+              "url": "/media/media8.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image16.png",
+              "type": "image",
+              "url": "/media/image16.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "966788",
+              "y": "806643"
+            },
+            "ext": {
+              "cx": "3303876",
+              "cy": "5781193"
+            }
+          }
+        },
+        {
+          "kind": "sp",
+          "text": [
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+            "",
+            "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
+            "",
+            "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+            "",
+            "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
+            "",
+            "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci."
+          ],
+          "assets": [],
+          "bounds": {
+            "off": {
+              "x": "4800600",
+              "y": "883226"
+            },
+            "ext": {
+              "cx": "7024255",
+              "cy": "6186309"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 13,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/media7.mp4",
+              "type": "video",
+              "url": "/media/media7.mp4"
+            },
+            {
+              "id": "rId1",
+              "target": "../media/media7.mp4",
+              "type": "media",
+              "url": "/media/media7.mp4"
+            },
+            {
+              "id": "rId4",
+              "target": "../media/image15.png",
+              "type": "image",
+              "url": "/media/image15.png"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "2145435",
+              "y": "921005"
+            },
+            "ext": {
+              "cx": "6977783",
+              "cy": "5015990"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 14,
+      "shapes": [
+        {
+          "kind": "pic",
+          "text": [],
+          "assets": [
+            {
+              "id": "rId2",
+              "target": "../media/image17.gif",
+              "type": "image",
+              "url": "/media/image17.gif"
+            }
+          ],
+          "bounds": {
+            "off": {
+              "x": "1316182",
+              "y": "1070264"
+            },
+            "ext": {
+              "cx": "4572000",
+              "cy": "4572000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "slide": 15,
+      "shapes": []
+    }
+  ],
+  "media": [
+    {
+      "file": "image1.png",
+      "bytes": 102531
+    },
+    {
+      "file": "image10.png",
+      "bytes": 294968
+    },
+    {
+      "file": "image11.png",
+      "bytes": 119107
+    },
+    {
+      "file": "image12.png",
+      "bytes": 2089956
+    },
+    {
+      "file": "image13.png",
+      "bytes": 2036422
+    },
+    {
+      "file": "image14.png",
+      "bytes": 2373848
+    },
+    {
+      "file": "image15.png",
+      "bytes": 114303
+    },
+    {
+      "file": "image16.png",
+      "bytes": 2618095
+    },
+    {
+      "file": "image17.gif",
+      "bytes": 5714353
+    },
+    {
+      "file": "image2.png",
+      "bytes": 61891
+    },
+    {
+      "file": "image3.png",
+      "bytes": 68998
+    },
+    {
+      "file": "image4.png",
+      "bytes": 37942
+    },
+    {
+      "file": "image5.png",
+      "bytes": 377680
+    },
+    {
+      "file": "image6.png",
+      "bytes": 589748
+    },
+    {
+      "file": "image7.png",
+      "bytes": 1762573
+    },
+    {
+      "file": "image8.gif",
+      "bytes": 1196669
+    },
+    {
+      "file": "image9.png",
+      "bytes": 1609080
+    },
+    {
+      "file": "media1.mp4",
+      "bytes": 266566
+    },
+    {
+      "file": "media2.mp4",
+      "bytes": 917093
+    },
+    {
+      "file": "media3.mp4",
+      "bytes": 26807268
+    },
+    {
+      "file": "media4.mp4",
+      "bytes": 5245075
+    },
+    {
+      "file": "media5.mp4",
+      "bytes": 847253
+    },
+    {
+      "file": "media6.mp4",
+      "bytes": 285395
+    },
+    {
+      "file": "media7.mp4",
+      "bytes": 149242
+    },
+    {
+      "file": "media8.mp4",
+      "bytes": 7269837
+    }
+  ]
+}

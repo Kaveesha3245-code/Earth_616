@@ -1,0 +1,51 @@
+[
+  {
+    "source": "opening-person-landscape-seek-1080.mp4",
+    "name": "intro-landscape.mp4",
+    "originalBytes": 7572620,
+    "playbackBytes": 4712789,
+    "savedPercent": 38
+  },
+  {
+    "source": "opening-person-portrait-seek-1080.mp4",
+    "name": "intro-portrait.mp4",
+    "originalBytes": 7632212,
+    "playbackBytes": 2020604,
+    "savedPercent": 74
+  },
+  {
+    "source": "media2-1080.mp4",
+    "name": "touch.mp4",
+    "originalBytes": 2445955,
+    "playbackBytes": 1108600,
+    "savedPercent": 55
+  },
+  {
+    "source": "universal-travel.mp4",
+    "name": "crossing.mp4",
+    "originalBytes": 18991586,
+    "playbackBytes": 3875673,
+    "savedPercent": 80
+  },
+  {
+    "source": "media4-1080.mp4",
+    "name": "arrival.mp4",
+    "originalBytes": 19746365,
+    "playbackBytes": 3886438,
+    "savedPercent": 80
+  },
+  {
+    "source": "charcoal/charcoal-silk-folds.mp4",
+    "name": "silk.mp4",
+    "originalBytes": 7265150,
+    "playbackBytes": 1318098,
+    "savedPercent": 82
+  },
+  {
+    "source": "flower/flower-arc/flower-arc.mp4",
+    "name": "flowers.mp4",
+    "originalBytes": 59237409,
+    "playbackBytes": 4745120,
+    "savedPercent": 92
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "name": "earth-616-2",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env node_modules/vite/bin/vite.js --host 127.0.0.1 --port 6162",
+    "build": "vite build",
+    "preview": "node --env-file-if-exists=.env node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 6162",
+    "start": "node --env-file-if-exists=.env server/start.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": { "three": "0.186.1", "vite": "8.3.4" },
+  "devDependencies": { "@playwright/test": "1.64.0" }
+}
