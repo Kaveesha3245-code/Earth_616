@@ -1,0 +1,44 @@
+/* Locked in the initial HTML, including while the session request is pending. */
+html[data-scroll-locked]{height:100%;overflow:hidden;overscroll-behavior:none;scroll-behavior:auto}
+html[data-scroll-locked] body{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+html[data-scroll-locked] .hero{height:100svh;height:100dvh;min-height:0;max-height:none;padding-top:clamp(96px,15dvh,135px);padding-bottom:24px}
+html[data-scroll-locked] .hero-heading{margin:clamp(24px,5dvh,70px) 0 clamp(36px,8dvh,80px)}
+html[data-scroll-locked] .hero h1{font-size:clamp(52px,min(10.5vw,19dvh),187px)}
+html[data-scroll-locked] #story-world,
+html[data-scroll-locked] #celebration,
+html[data-scroll-locked] footer,
+html[data-scroll-locked] .scroll-cue,
+html[data-scroll-locked] .skip-link,
+html[data-scroll-locked] .reading-progress{display:none!important}
+html[data-scroll-locked] .hero-bottom{min-height:40px}
+
+@media(max-width:760px){
+  html[data-scroll-locked] .hero{padding:100px var(--pad) 20px;gap:12px}
+  html[data-scroll-locked] .hero-heading{margin:0}
+  html[data-scroll-locked] .hero-heading .eyebrow{margin-bottom:16px}
+  html[data-scroll-locked] .hero h1{font-size:clamp(42px,min(15.5vw,13dvh),90px)}
+  html[data-scroll-locked] .hero-caption{margin-top:16px}
+  html[data-scroll-locked] .film-cue{position:relative;inset:auto;align-self:flex-start}
+  html[data-scroll-locked] .hero-bottom{padding-top:12px;flex-shrink:0}
+}
+
+@media(max-height:560px) and (min-aspect-ratio:1/1){
+  html[data-scroll-locked] .hero{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:'edition edition' 'heading film' 'bottom bottom';gap:10px 24px;padding:76px var(--pad) 12px}
+  html[data-scroll-locked] .hero-topline{grid-area:edition}
+  html[data-scroll-locked] .hero-heading{grid-area:heading;align-self:center;margin:0}
+  html[data-scroll-locked] .hero-heading .eyebrow{margin-bottom:10px}
+  html[data-scroll-locked] .hero h1{font-size:clamp(36px,min(9vw,16dvh),90px)}
+  html[data-scroll-locked] .hero-caption{margin-top:12px}
+  html[data-scroll-locked] .hero-caption p{font-size:10px}
+  html[data-scroll-locked] .film-cue{grid-area:film;position:relative;inset:auto;align-self:center}
+  html[data-scroll-locked] .film-cue>span:last-child{max-width:145px}
+  html[data-scroll-locked] .hero-bottom{grid-area:bottom;padding-top:8px;min-height:32px}
+}
+
+@media(max-width:760px) and (max-height:560px) and (max-aspect-ratio:1/1){
+  html[data-scroll-locked] .hero{padding-top:80px;padding-bottom:12px;gap:8px}
+  html[data-scroll-locked] .hero-heading .eyebrow{font-size:7px;margin-bottom:8px}
+  html[data-scroll-locked] .hero h1{font-size:clamp(36px,min(15.5vw,12dvh),72px)}
+  html[data-scroll-locked] .hero-caption{margin-top:12px}
+  html[data-scroll-locked] .hero-caption p{font-size:10px}
+}

@@ -8,6 +8,10 @@ The complete site uses a dark palette with rounded buttons, inputs and picture f
 
 ## Section music
 
+The entry screen fits the desktop or phone viewport and stays fixed until the server verifies a signed-in session. The scroll prompt and following page sections become available after login; locking the archive returns to the entry screen. The fullscreen opening and its sign-in step remain available while scrolling is locked.
+
+The opening soundtrack buffers directly from the initial HTML and retries playback during the first click, tap or key press. Browsers may require that interaction before allowing audible playback. Other section tracks retain their independent mute settings.
+
 The previous synthesized score and message-only music behavior have been removed. The supplied tracks now cover complete sections:
 
 | Section | Track |
@@ -48,6 +52,8 @@ For the browser checks, with the dev server running:
 ```powershell
 node scripts/section-media-qa.mjs
 ```
+
+For authenticated entry, mobile scroll gestures and opening-audio checks, run `node scripts/entry-gate-qa.mjs`.
 
 The browser script uses Microsoft Edge and saves screenshots in `test-results`.
 

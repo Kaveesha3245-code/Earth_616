@@ -46,7 +46,12 @@ export function createSectionAudio({ button, tracks = {}, onBlocked } = {}) {
       block(new Error('The section music is unavailable.'));
       return Promise.resolve(false);
     }
-    if (pending?.audio === audio) return pending.promise;
+    if (pending?.audio === audio) {
+      if (!retry) return pending.promise;
+      // A pending autoplay attempt may not have had user activation. Issue a
+      // fresh play() in this gesture instead of waiting for that attempt.
+      cancelPending();
+    }
     if (!audio.paused && !audio.error) {
       state = audio.muted ? 'muted' : 'playing'; paint();
       return Promise.resolve(true);
@@ -89,13 +94,16 @@ export function createSectionAudio({ button, tracks = {}, onBlocked } = {}) {
   }
 
   for (const name of SECTIONS) {
-    const audio = document.createElement('audio');
+    const existing = document.querySelector(`audio[data-section-track="${name}"]`);
+    const audio = existing || document.createElement('audio');
     audio.dataset.sectionTrack = name;
     audio.hidden = true; audio.controls = false; audio.loop = true;
-    audio.preload = 'metadata'; audio.volume = 0.68;
+    // Buffer the opening track while the landing page loads. Later sections
+    // only need their metadata until the visitor reaches them.
+    audio.preload = name === 'journey' ? 'auto' : 'metadata'; audio.volume = 0.68;
     audio.setAttribute('aria-hidden', 'true');
     const url = typeof tracks[name] === 'string' ? tracks[name].trim() : '';
-    if (url) audio.src = url;
+    if (url && audio.getAttribute('src') !== url) audio.src = url;
     preferences.set(name, false); elements.set(name, audio);
     audio.addEventListener('playing', () => {
       if (disposed || !active || audio !== current() || state === 'blocked') { audio.pause(); return; }
@@ -109,7 +117,7 @@ export function createSectionAudio({ button, tracks = {}, onBlocked } = {}) {
       if (pending?.audio === audio) pending.finish(false, error);
       else { audio.pause(); block(error); }
     });
-    document.body.append(audio);
+    if (!existing) document.body.append(audio);
   }
 
   function setMuted(value) {

@@ -6,6 +6,7 @@ import './refinements.css';
 document.body.classList.add('has-js');
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
+const entryHash=location.hash;
 const preference=matchMedia('(prefers-reduced-motion: reduce)');
 const sectionAudio=createSectionAudio({button:$('#audio-toggle'),tracks:{
   journey:'/media/audio/journey-avengers.mp3',
@@ -15,6 +16,7 @@ const sectionAudio=createSectionAudio({button:$('#audio-toggle'),tracks:{
 const messageVideo=$('#message-video');
 let motionPaused=preference.matches;
 let authenticated=false,sourceLoaded=false,pendingAfterLogin;
+let sessionRevision=0;
 let messageVisible=false,messagePausedByUser=false,messageUpdate=0;
 let toastTimer,tunnel,heart,sceneModule,cinema,activeBackdrop;
 const sceneVisible=new Map(),videoVisible=new WeakMap();
@@ -30,12 +32,14 @@ $$('dialog').forEach(dialog=>{
 
 function unlockAudio(){void sectionAudio.unlock();}
 document.addEventListener('pointerdown',unlockAudio,{passive:true,capture:true});
+document.addEventListener('pointerup',unlockAudio,{passive:true,capture:true});
+document.addEventListener('click',unlockAudio,{passive:true,capture:true});
 document.addEventListener('keydown',unlockAudio,{capture:true});
 function selectSectionMusic(){
   const anchor=innerHeight*.4;
   const celebration=$('#celebration').getBoundingClientRect();
   const archive=$('#archive').getBoundingClientRect();
-  const section=$('#film-dialog').open?'journey':celebration.top<=anchor?'celebration':archive.top<=anchor&&archive.bottom>anchor?'archive':'journey';
+  const section=!authenticated||$('#film-dialog').open?'journey':celebration.top<=anchor?'celebration':archive.top<=anchor&&archive.bottom>anchor?'archive':'journey';
   document.body.dataset.audioSection=section;sectionAudio.setSection(section);
 }
 async function syncMessagePlayback(){
@@ -53,12 +57,22 @@ function showLogin(after){pendingAfterLogin=after;$('#login-error').textContent=
 $$('[data-open-login]').forEach(button=>button.addEventListener('click',()=>showLogin(()=>$('#archive').scrollIntoView({behavior:motionPaused?'instant':'smooth'}))));
 $('#show-password').addEventListener('click',event=>{const show=$('#password').type==='password';$('#password').type=show?'text':'password';event.currentTarget.textContent=show?'HIDE':'SHOW';event.currentTarget.setAttribute('aria-label',show?'Hide password':'Show password');event.currentTarget.setAttribute('aria-pressed',String(show));});
 $('#login-form').addEventListener('submit',async event=>{event.preventDefault();const button=event.submitter;button.disabled=true;$('#login-error').textContent='';try{await api('/api/auth',{password:$('#password').value});$('#password').value='';applySession(true);$('#login-dialog').close();await loadArchive();const after=pendingAfterLogin;pendingAfterLogin=null;after?.();}catch(error){$('#login-error').textContent=error.message;}finally{button.disabled=false;}});
-function applySession(value){authenticated=value;$('#archive-locked').hidden=value;$('#archive-open').hidden=!value;$('#logout').hidden=!value;if(!value){sourceLoaded=false;messageVisible=false;++messageUpdate;messageVideo.pause();messageVideo.removeAttribute('src');messageVideo.load();$('#portrait-grid').replaceChildren();$('#source-copy').replaceChildren();}selectSectionMusic();}
+function applySession(value){
+  sessionRevision++;
+  authenticated=value;
+  document.documentElement.toggleAttribute('data-scroll-locked',!value);
+  $('#archive-locked').hidden=value;$('#archive-open').hidden=!value;$('#logout').hidden=!value;
+  if(!value){
+    window.scrollTo({top:0,left:0,behavior:'instant'});
+    sourceLoaded=false;messageVisible=false;++messageUpdate;messageVideo.pause();messageVideo.removeAttribute('src');messageVideo.load();$('#portrait-grid').replaceChildren();$('#source-copy').replaceChildren();
+  }else requestAnimationFrame(positionHeart);
+  selectSectionMusic();
+}
 $('#logout').addEventListener('click',async()=>{try{await api('/api/logout',{});applySession(false);toast('Your archive is locked.');}catch(error){toast(error.message);}});
 async function loadArchive(){
   if(!authenticated||sourceLoaded)return;
   try{
-    const response=await fetch('/private-media/seed/birthday-message.txt',{credentials:'same-origin'});if(!response.ok)throw new Error('The birthday message could not be loaded. Please sign in again.');const message=await response.text();if(!authenticated)return;
+    const response=await fetch('/private-media/seed/birthday-message.txt',{credentials:'same-origin'});if(!response.ok){if(response.status===401)applySession(false);throw new Error('The birthday message could not be loaded. Please sign in again.');}const message=await response.text();if(!authenticated)return;
     const labels=['THE SPARK','THE STRENGTH','THE STORY'];
     [12,14,13].forEach((number,index)=>{
       const figure=document.createElement('figure');figure.className='portrait-card';const button=document.createElement('button');button.setAttribute('aria-label',`View portrait ${index+1}: ${labels[index].toLowerCase()}`);
@@ -116,7 +130,7 @@ const sceneObserver=new IntersectionObserver(async entries=>{for(const entry of 
   if(entry.isIntersecting&&!controller&&!entry.target.dataset.sceneLoading){entry.target.dataset.sceneLoading='true';const canvas=mode==='tunnel'?$('#universe'):$('#heart-canvas');try{sceneModule||=import('./scene.js');const{createUniverse}=await sceneModule;controller=createUniverse(canvas,{reducedMotion:preference.matches,initialMode:mode,onError(){canvas.hidden=true;if(mode==='heart')$('#heart-stage').classList.remove('has-webgl');}});controller.setMode(mode);if(mode==='tunnel')tunnel=controller;else{heart=controller;$('#heart-stage').classList.toggle('has-webgl',!canvas.hidden);}}catch{canvas.hidden=true;}}
   updateScenePauses();
 }},{rootMargin:'100px 0px',threshold:0});sceneObserver.observe($('#story-world'));sceneObserver.observe($('#celebration'));
-let scrollQueued=false;function updateScroll(){scrollQueued=false;const max=document.documentElement.scrollHeight-innerHeight;$('.reading-progress i').style.width=`${Math.max(0,Math.min(100,scrollY/max*100))}%`;const world=$('#story-world');tunnel?.setProgress(Math.max(0,Math.min(1,-world.getBoundingClientRect().top/(world.offsetHeight-innerHeight))));syncBackgroundVideos();updateScenePauses();selectSectionMusic();}
+let scrollQueued=false;function updateScroll(){scrollQueued=false;const max=document.documentElement.scrollHeight-innerHeight;$('.reading-progress i').style.width=`${max>0?Math.max(0,Math.min(100,scrollY/max*100)):0}%`;const world=$('#story-world'),range=world.offsetHeight-innerHeight;tunnel?.setProgress(range>0?Math.max(0,Math.min(1,-world.getBoundingClientRect().top/range)):0);syncBackgroundVideos();updateScenePauses();selectSectionMusic();}
 addEventListener('scroll',()=>{if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateScroll);}},{passive:true});addEventListener('resize',updateScroll,{passive:true});updateScroll();
 function positionHeart(){
   const stage=$('#heart-stage'),word=$('#birthday-word'),section=$('#celebration');
@@ -146,4 +160,13 @@ $('#make-wish').addEventListener('click',()=>{
   ],{duration:quiet?600:1450,easing:'ease-out'});
 });
 addEventListener('pagehide',()=>sectionAudio.setActive(false));
-api('/api/session').then(async session=>{applySession(Boolean(session.authenticated));if(session.authenticated)await loadArchive();}).catch(()=>toast('The archive service is unavailable. The public story is still open.'));
+const initialSessionRevision=sessionRevision;
+api('/api/session').then(async session=>{
+  if(sessionRevision!==initialSessionRevision)return;
+  applySession(Boolean(session.authenticated));
+  if(session.authenticated){
+    await loadArchive();
+    // Fragment targets become available only after the server verifies the session.
+    if(entryHash){const target=document.getElementById(entryHash.slice(1));target?.scrollIntoView({behavior:'instant'});}
+  }
+}).catch(()=>{if(sessionRevision===initialSessionRevision)toast('The archive service is unavailable. Please try signing in again.');});

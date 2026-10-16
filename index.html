@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-scroll-locked>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +12,7 @@
   <link rel="icon" type="image/svg+xml" href="/emblem.svg" />
   <link rel="preload" href="/media/charcoal/poster.webp" as="image" />
   <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/entry-gate.css" />
 </head>
 <body>
   <a class="skip-link" href="#journey">Skip to the journey</a>
@@ -79,7 +80,8 @@
   </dialog>
   <dialog id="lightbox" class="film-dialog"><button class="dialog-close" data-close aria-label="Close memory">×</button><div id="lightbox-content"></div></dialog>
   <button id="audio-toggle" class="sound-toggle" type="button" aria-label="Mute audio" aria-pressed="false" title="Sound on"><span aria-hidden="true">♫</span></button>
-  <noscript><div class="noscript-note">The story above is readable without JavaScript. Enable JavaScript for films and the personal archive.</div></noscript>
+  <audio id="journey-audio" data-section-track="journey" src="/media/audio/journey-avengers.mp3" preload="auto" loop hidden aria-hidden="true"></audio>
+  <noscript><div class="noscript-note">Enable JavaScript to sign in and explore your birthday universe.</div></noscript>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
