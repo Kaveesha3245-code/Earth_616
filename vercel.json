@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/portal.js": {
+      "includeFiles": "private/seed-media/**",
+      "excludeFiles": "{public/**,dist/**,tests/**,test-results/**,.data/**}",
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/portal?portalPath=/api/:path*" },
+    { "source": "/private-media/:path*", "destination": "/api/portal?portalPath=/private-media/:path*" }
+  ]
+}

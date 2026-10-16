@@ -21,6 +21,7 @@ const STATIC_TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascr
 
 STATIC_TYPES['.m3u8'] = 'application/vnd.apple.mpegurl';
 STATIC_TYPES['.ts'] = 'video/mp2t';
+STATIC_TYPES['.txt'] = 'text/plain; charset=utf-8';
 
 class ApiError extends Error {
   constructor(status, message) { super(message); this.status = status; }
@@ -53,9 +54,16 @@ async function body(req, limit) {
 
 async function jsonBody(req) {
   if (req.headers['content-type']?.split(';')[0].trim().toLowerCase() !== 'application/json') throw new ApiError(415, 'Use application/json.');
+  const limit = 16 * 1024;
+  const length = Number(req.headers['content-length']);
+  if (Number.isFinite(length) && length > limit) throw new ApiError(413, 'The request is too large.');
   try {
-    const value = JSON.parse((await body(req, 16 * 1024)).toString('utf8'));
+    // Vercel's Node helpers consume the stream and provide a lazy body getter.
+    // Access it inside this try so malformed JSON still produces our JSON error.
+    const parsedByRuntime = Object.hasOwn(req, 'body');
+    const value = parsedByRuntime ? req.body : JSON.parse((await body(req, limit)).toString('utf8'));
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error();
+    if (parsedByRuntime && Buffer.byteLength(JSON.stringify(value)) > limit) throw new ApiError(413, 'The request is too large.');
     return value;
   } catch (error) {
     if (error instanceof ApiError) throw error;
@@ -154,6 +162,7 @@ export function createPortalHandler(options = {}) {
   const seedDir = resolve(options.seedDir || join(root, 'private', 'seed-media'));
   const uploadsDir = join(dataDir, 'uploads');
   const production = options.production ?? process.env.NODE_ENV === 'production';
+  const readOnly = options.readOnly === true;
   const password = options.password || process.env.PORTAL_PASSWORD || DEFAULT_PASSWORD;
   const adminPassword = options.adminPassword || process.env.PORTAL_ADMIN_PASSWORD || password;
   const expectedOrigin = options.origin || process.env.PORTAL_ORIGIN;
@@ -163,9 +172,13 @@ export function createPortalHandler(options = {}) {
   let records = [];
   let serial = Promise.resolve();
   const ready = (async () => {
-    await mkdir(uploadsDir, { recursive: true });
     secret = options.sessionSecret || process.env.PORTAL_SESSION_SECRET;
-    if (secret && secret.length < 32) throw new Error('PORTAL_SESSION_SECRET must contain at least 32 characters.');
+    if (secret && (typeof secret !== 'string' || secret.length < 32)) throw new ApiError(503, 'PORTAL_SESSION_SECRET must contain at least 32 characters.');
+    if (readOnly) {
+      if (!secret) throw new ApiError(503, 'Set PORTAL_SESSION_SECRET in Vercel environment variables, then redeploy.');
+      return;
+    }
+    await mkdir(uploadsDir, { recursive: true });
     if (!secret) {
       try { secret = (await readFile(join(dataDir, 'session-key'), 'utf8')).trim(); }
       catch (error) {
@@ -286,6 +299,9 @@ export function createPortalHandler(options = {}) {
         if (!record) throw new ApiError(404, 'File not found.');
         await streamFile(req, res, safePath(uploadsDir, record.storedName), record.mimeType, true); return;
       }
+      // The current visitor UI has no gallery or uploads. Serverless archive mode
+      // must never rely on mutable files or instance-local upload tokens.
+      if (readOnly) throw new ApiError(404, 'Endpoint not found.');
       if (pathname === '/api/uploads' && method === 'POST') {
         const input = await jsonBody(req);
         if (input.consent !== true) throw new ApiError(400, 'Confirm you have permission to share this memory.');

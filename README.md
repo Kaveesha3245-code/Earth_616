@@ -53,6 +53,16 @@ The browser script uses Microsoft Edge and saves screenshots in `test-results`.
 
 ## Personal archive
 
+### Deploy on Vercel
+
+Deploy this entire project folder (the folder containing `package.json`, `vercel.json`, `api`, `server` and `private`), with the **Vite** framework preset, build command `npm run build` and output directory `dist`. When importing the Git repository, select this folder as the Root Directory. Deploying only the `dist` folder omits the login API and causes `/api/auth` to return 404.
+
+In Vercel **Settings → Environment Variables**, add `PORTAL_SESSION_SECRET` for Production and Preview. Use a random value of at least 32 characters; generate one locally with `node -e "console.log(require('node:crypto').randomBytes(48).toString('hex'))"`. Keep the same secret across function instances. `PORTAL_PASSWORD` is optional and overrides the existing case-sensitive archive password. Do not prefix either variable with `VITE_`. Leave `PORTAL_ORIGIN` unset unless you intentionally restrict login to one exact origin; leaving it unset supports both the production hostname and Vercel preview hostnames.
+
+Commit/push the project changes and redeploy after saving the environment variables. Verify `/api/session` returns JSON with `authenticated: false`, sign in, and check that portraits, the birthday letter and the memory video load. `/api/health` also returns JSON when the function is configured correctly.
+
+`vercel.json` routes `/api/*` and `/private-media/*` to `api/portal.js` and includes the private seed files in the function bundle. The function validates the signed session cookie before streaming private files; range requests support video seeking. The private files stay outside `dist` and `public`. This archive mode performs no filesystem writes and does not expose the unused upload/gallery backend; the full local server retains that backend. See [Vercel's Node.js runtime](https://vercel.com/docs/functions/runtimes/node-js) and [streaming guidance](https://vercel.com/kb/guide/how-to-bypass-vercel-body-size-limit-serverless-functions).
+
 The server issues signed HttpOnly session cookies and protects the original portraits, slideshow, soundtrack and messages. The visitor gallery, upload controls, empty state and review interface were removed at the user's request. Their previous backend remains available in source; it is no longer part of the visitor experience. Earlier browser QA scripts describe the previous interface and are retained as history rather than current acceptance tests.
 
 Runtime gallery files and the session signing key live in `.data`, excluded from source control and static delivery. Local uploads are labeled unscanned if ClamAV is unavailable. Production uploads fail closed unless the scanner succeeds. Production hosting needs persistent storage, HTTPS, unique credentials and a configured scanner. This edition includes a local filesystem backend; cloud storage, CDN and CMS account integrations are documented deployment work.
